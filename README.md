@@ -7,6 +7,8 @@ This repository documents a proof-of-concept Wi-Fi Deauthentication (Jamming) pr
 
 ---
 
+**Tutorial: https://www.youtube.com/watch?v=wl0bLGVprjg** 
+
 ## 🛠️ Hardware & Software Requirements
 
 ### Hardware
@@ -30,7 +32,7 @@ This repository documents a proof-of-concept Wi-Fi Deauthentication (Jamming) pr
 2. Plug your external Atheros USB wireless adapter into your host machine.
 3. Attach the USB device directly to the Kali Linux virtual machine via the VirtualBox menu: Go to **Devices** > **USB** > Select **ATHEROS USB2.0 WLAN**.
 
-![Connecting Atheros USB via VirtualBox](path/to/your/screenshot_step1.png)
+![](images/step1.png)
 
 ---
 
@@ -41,6 +43,8 @@ Open a terminal in Kali Linux and execute the following command to verify that t
 ```bash
 sudo ifconfig
 ```
+![](images/step2.png)
+
 
 Locate your wireless interface name (typically identified as `wlan0`).
 
@@ -53,6 +57,8 @@ To capture and inject raw wireless management frames, initialize monitor mode on
 ```bash
 sudo airmon-ng start wlan0
 ```
+![](images/step3.png)
+
 
 **Note:** If the terminal prompts you regarding conflicting processes (e.g., `NetworkManager`, `wpa_supplicant`), you can clear them using `sudo airmon-ng check kill` if necessary.
 
@@ -67,6 +73,7 @@ Scan the surrounding airspace to identify available Access Points within your ad
 ```bash
 sudo airodump-ng wlan0mon
 ```
+![](images/step4.png)
 
 Analyze the live feed and note down your specific target parameters:
 
@@ -85,6 +92,8 @@ Isolate the target Access Point to observe specifically which client devices (ST
 ```bash
 sudo airodump-ng --bssid <TARGET_BSSID> -c <TARGET_CHANNEL> wlan0mon
 ```
+![](images/step5.png)
+
 
 Replace `<TARGET_BSSID>` and `<TARGET_CHANNEL>` with your collected network values without the angle brackets.
 
